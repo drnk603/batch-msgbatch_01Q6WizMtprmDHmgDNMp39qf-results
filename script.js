@@ -400,7 +400,7 @@
                     isValid = false;
                     errors.push('Vorname ist erforderlich.');
                     showFieldError(firstName, 'Bitte geben Sie Ihren Vornamen ein.');
-                } else if (firstName && !/^[a-zA-ZÀ-ÿs-']{2,50}$/.test(firstName.value.trim())) {
+                } else if (firstName && !/^[a-zA-ZÀ-ÿ\s-']{2,50}$/.test(firstName.value.trim())) {
                     isValid = false;
                     errors.push('Vorname enthält ungültige Zeichen.');
                     showFieldError(firstName, 'Nur Buchstaben, Leerzeichen, Bindestrich und Apostroph erlaubt.');
@@ -413,7 +413,7 @@
                     isValid = false;
                     errors.push('Nachname ist erforderlich.');
                     showFieldError(lastName, 'Bitte geben Sie Ihren Nachnamen ein.');
-                } else if (lastName && !/^[a-zA-ZÀ-ÿs-']{2,50}$/.test(lastName.value.trim())) {
+                } else if (lastName && !/^[a-zA-ZÀ-ÿ\s-']{2,50}$/.test(lastName.value.trim())) {
                     isValid = false;
                     errors.push('Nachname enthält ungültige Zeichen.');
                     showFieldError(lastName, 'Nur Buchstaben, Leerzeichen, Bindestrich und Apostroph erlaubt.');
@@ -426,7 +426,7 @@
                     isValid = false;
                     errors.push('E-Mail ist erforderlich.');
                     showFieldError(email, 'Bitte geben Sie Ihre E-Mail-Adresse ein.');
-                } else if (email && !/^[^s@]+@[^s@]+.[^s@]+$/.test(email.value.trim())) {
+                } else if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
                     isValid = false;
                     errors.push('E-Mail-Format ist ungültig.');
                     showFieldError(email, 'Bitte geben Sie eine gültige E-Mail-Adresse ein (z.B. name@domain.de).');
@@ -435,7 +435,7 @@
                 }
 
                 var phone = currentForm.querySelector('#phone');
-                if (phone && phone.value.trim() !== '' && !/^[ds+-()]{10,20}$/.test(phone.value.trim())) {
+                if (phone && phone.value.trim() !== '' && !/^[\d\s+\-()]{10,20}$/.test(phone.value.trim())) {
                     isValid = false;
                     errors.push('Telefonnummer-Format ist ungültig.');
                     showFieldError(phone, 'Bitte geben Sie eine gültige Telefonnummer ein (10-20 Zeichen, nur Ziffern, +, -, (, )).');
@@ -606,7 +606,7 @@
                     });
                     
                     var style = document.createElement('style');
-                    style.textContent = '@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } } @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }';
+                    style.textContent = '@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } } @keyframes slideUp { from { height: 0; max-height: calc(100vh - var(--header-h)); opacity: 1; } to { transform: translateY(0); opacity: 1; } }';
                     document.head.appendChild(style);
                 }
             });
@@ -636,94 +636,3 @@
     }
 
 })();
-# CSS Animations
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes ripple {
-  to {
-    transform: scale(4);
-    opacity: 0;
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-.navbar-collapse {
-  height: calc(100vh - var(--header-h));
-}
-
-.alert {
-  animation: slideIn 0.3s ease-out;
-}
-
-.card:hover,
-.c-card:hover {
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  @keyframes fadeIn,
-  @keyframes fadeInUp,
-  @keyframes slideIn,
-  @keyframes slideUp,
-  @keyframes ripple,
-  @keyframes spin,
-  @keyframes pulse {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-  }
-}

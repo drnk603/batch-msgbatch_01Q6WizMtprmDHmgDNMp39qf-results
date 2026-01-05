@@ -1644,3 +1644,20 @@ footer a:focus {
     page-break-inside: avoid;
   }
 }
+
+/* AUTO-INJECTED: bg-dark child text fix */
+.bg-dark > * {
+  color:white!important;
+}
+
+/* --- AUTO-INJECTED: AOS mobile/tablet override --- */
+@media (max-width: 1024px) {
+  [data-aos="fade-left"],
+  [data-aos="fade-right"] {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+  }
+  .c-logo__img {
+    display: none!important;
+  }
+}
